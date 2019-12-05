@@ -1,6 +1,23 @@
 <h1>{{title}}</h1>
 <p>Welcome to the {{title}} page</p>
-<p>
-  <a href="/characters"> Follow this link to get to the characters page</a>
+<div class="home">
+
+  {{#if user}}
+
+  <p>welcome, {{user.username}}</p>
+
+  <a href="/characters"> This is the characters page</a>
   <a href="/movies">This is the movies page</a>
-</p>
+
+  <form action="/logout" method="POST">
+    <button>Logout</button>
+  </form>
+
+  {{else}}
+
+  <a href="/users/login">login</a>
+  <a href="/users/signup">signup</a>
+
+  {{/if}}
+
+</div>

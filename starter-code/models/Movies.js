@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const movieSchema = new Schema({
   title: String,
   year: String,
-  producer: String
+  featured: { type: Schema.Types.ObjectId, ref: "Character" },
+  added: { type: Schema.Types.ObjectId, ref: "User", required: true }
 });
 
 const Movie = mongoose.model("Movie", movieSchema);

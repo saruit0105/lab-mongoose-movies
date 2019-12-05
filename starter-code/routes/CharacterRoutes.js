@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Character = require("../models/MovieCharacters");
+const Movie = require("../models/Movies");
 
 router.get("/characters/edit/:placeHolderID", async (req, res, next) => {
   try {
@@ -15,7 +16,7 @@ router.post("/characters/update/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     let update = { ...req.body };
-    const response = await Character.findByIdAndUpdate(id, update, {
+    await Character.findByIdAndUpdate(id, update, {
       new: true
     });
     res.redirect("/characters/" + id);
@@ -58,7 +59,8 @@ router.get("/characters/:idOfChar", async (req, res, next) => {
   try {
     const id = req.params.idOfChar;
     const theChar = await Character.findById(id);
-    res.render("character-views/SingleChar", { theChar });
+    const movies = await Movie.find({ featured: req.params.idOfChar });
+    res.render("character-views/SingleChar", { theChar, movies });
   } catch (err) {
     next(err);
   }

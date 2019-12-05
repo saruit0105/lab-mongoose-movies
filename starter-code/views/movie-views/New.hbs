@@ -8,9 +8,13 @@
   <p> Year</p>
   <input type="text" name="theNewYear">
 
-  <p> producer </p>
-  <input type="text" name="theNewProducer">
-  <button> Save!</button>
+  <p> Featured </p>
+  <select name="theNewFeatured" id="">
+    {{#each allCharacters}}
+    <option value={{this.id}}>{{this.name}}</option>
+    {{/each}}
 
+  </select>
 
+  <button> submit</button>
 </form>
